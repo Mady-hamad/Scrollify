@@ -12,6 +12,7 @@ import {
   TextField,
   Select,
 } from "@shopify/polaris";
+import {useAuthenticatedFetch} from '../hooks/useAuthenticatedFetch'
 import { ExternalMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import Rating from "../components/Rating";
@@ -48,6 +49,22 @@ export default function HomePage() {
   const handleSetBorderRadius = (value) => setBorderRadius(value);
   const handleSetBorderColor = (value) => setBorderColor(value);
   const handleSetBorderSize = (value) => setBorderSize(value);
+  
+
+
+
+  const ttt = useAuthenticatedFetch()
+  const saveData = async () => {
+    const styles = { bordersize, bordercolor, borderradius, backgroundcolor, fontsize, fontcolor, font, fontstyle, buttontext}
+    const data = await ttt("/api/hello",{
+      headers:{
+        'Content-Type':'application/json'
+      },
+      method:'POST',
+      body:JSON.stringify(styles)
+    })
+    console.log(await data.text());
+  }
   const handleSetStaus = () => {
     console.log(status);
     setStatus(!status);
@@ -237,7 +254,7 @@ export default function HomePage() {
 
                     {/* save changes */}
                     <HorizontalStack align="end">
-                      <Button loading={false} primary>
+                      <Button loading={false} primary onClick={saveData}>
                         Save
                       </Button>
                     </HorizontalStack>

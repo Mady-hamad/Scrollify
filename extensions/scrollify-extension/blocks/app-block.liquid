@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="{{ 'app.css' | asset_url  }}">
+<link src={{'app.js' | asset_url | script_tag }}></link>
+{}
+<button class="btn">Load more...</button>
+
+{% schema %}
+{
+  "name": "Scrollify",
+  "target": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "product", "autofill": true },
+    { "type": "color", "id": "colour", "label": "Star Colour", "default": "#ff0000" }
+  ]
+}
+{% endschema %}
+
